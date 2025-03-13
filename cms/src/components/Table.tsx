@@ -1,5 +1,20 @@
 
-export const Table = () => {
+interface User {
+  name: string
+  lastname: string
+  email: string
+}
+
+
+interface Props {
+  users: User[],
+}
+
+
+export const Table = (props: Props) => {
+
+  const { users } = props;
+
   return (
     <table className="table">
       <thead>
@@ -7,22 +22,17 @@ export const Table = () => {
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">Email</th>
-          <th scope="col">Tipo</th>
+          {/* <th scope="col">Tipo</th> */}
         </tr>
       </thead>
       <tbody>
-        <tr className="table-secondary">
-          <td>Cesar</td>
-          <td>Casco</td>
-          <td>eduardomelchor34@gmail.com</td>
-          <td>Amigo</td>
-        </tr>
-        <tr className="">
-          <td>Cesar</td>
-          <td>Casco</td>
-          <td>eduardomelchor34@gmail.com</td>
-          <td>Amigo</td>
-        </tr>
+      {users.map((user, index) => (
+            <tr key={index} className="table-secondary">
+              <td>{user.name}</td>
+              <td>{user.lastname}</td>
+              <td>{user.email}</td>
+            </tr>
+          ))}
       </tbody>
     </table>
   )

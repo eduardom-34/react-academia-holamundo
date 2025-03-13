@@ -2,25 +2,30 @@ import { useForm } from "react-hook-form";
 import { userForm, userSchema } from "../schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+interface Props {
+  onAddUser: (user: userForm) => void;
+}
 
-export const Form = () => {
+
+export const Form = ({ onAddUser}: Props) => {
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(userSchema)
   });
 
-  console.log(errors);
   const onSubmit = ( data: userForm ) => {
-    console.log(data)
+    onAddUser(data);
+    reset();
   }
 
   return (
     <form 
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={ handleSubmit(onSubmit) }
       className="mb-3"
     >
 
@@ -64,7 +69,7 @@ export const Form = () => {
       </div> */}
 
       <button type="submit" className="btn btn-primary me-2">Enviar</button>
-      <button className="btn btn-secondary ">Limpiar</button>
+      <button className="btn btn-secondary" onClick={ () => reset() }>Limpiar</button>
     </form>
   )
 }
