@@ -1,24 +1,58 @@
+import { useForm } from "react-hook-form";
+import { userForm, userSchema } from "../schemas/user";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 export const Form = () => {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(userSchema)
+  });
+
+  console.log(errors);
+  const onSubmit = ( data: userForm ) => {
+    console.log(data)
+  }
+
   return (
-    <form className="mb-3">
+    <form 
+      onSubmit={handleSubmit(onSubmit)}
+      className="mb-3"
+    >
 
       <div className="mb-3">
         <label htmlFor="inputName" className="form-label">Nombre</label>
-        <input type="text" className="form-control" id="name" />
+        <input {...register('name')}
+          type="text" 
+          className="form-control" 
+          id="name"
+        />
+        {errors.name?.message ?? <p>{ errors?.name?.message }</p> }
       </div>
 
       <div className="mb-3">
         <label htmlFor="inputLastname" className="form-label">Apellido</label>
-        <input type="text" className="form-control" id="lastname" />
+        <input {...register('lastname')}
+          type="text" 
+          className="form-control" 
+          id="lastname" />
+          {errors.lastname?.message ?? <p>{ errors?.lastname?.message }</p> }
       </div>
 
       <div className="mb-3">
         <label htmlFor="inputEmail" className="form-label">Correo</label>
-        <input type="email" className="form-control" id="email" />
+        <input {...register('email')}
+          type="email" 
+          className="form-control" 
+          id="email" />
+          {errors.email?.message ?? <p>{ errors?.email?.message }</p> }
       </div>
 
-      <div className="mb-3">
+      {/* <div className="mb-3">
         <label htmlFor="disabledSelect" className="form-label"> Tipo </label>
         <select id="disabledSelect" className="form-select">
           <option>-- Selecciona tipo --</option>
@@ -27,7 +61,7 @@ export const Form = () => {
           <option>Amigo</option>
           <option>Otros</option>
         </select>
-      </div>
+      </div> */}
 
       <button type="submit" className="btn btn-primary me-2">Enviar</button>
       <button className="btn btn-secondary ">Limpiar</button>
