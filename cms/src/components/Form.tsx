@@ -57,7 +57,7 @@ export const Form = ({ onAddUser}: Props) => {
           {errors.email?.message ?? <p>{ errors?.email?.message }</p> }
       </div>
 
-      {/* <div className="mb-3">
+      <div className="mb-3">
         <label htmlFor="disabledSelect" className="form-label"> Tipo </label>
         <select id="disabledSelect" className="form-select">
           <option>-- Selecciona tipo --</option>
@@ -66,7 +66,7 @@ export const Form = ({ onAddUser}: Props) => {
           <option>Amigo</option>
           <option>Otros</option>
         </select>
-      </div> */}
+      </div>
 
       <button type="submit" className="btn btn-primary me-2">Enviar</button>
       <button className="btn btn-secondary" onClick={ () => reset() }>Limpiar</button>

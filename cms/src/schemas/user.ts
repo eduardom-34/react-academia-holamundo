@@ -11,7 +11,11 @@ export const userSchema = z.object({
 
   email: z.string({ required_error: "Email es requerido"})
     .min(1, {message: 'Email es requerido'})
-    .min(3, {message: "Longitud minima 3"})
+    .min(3, {message: "Longitud minima 3"}),
+
+  tipo: z.string({ required_error: "Tipo es requerido" })
+    .min(1, {message: 'Tipo es requerido'})
+    .min(3, {message: "Longitud minima 3"}),
 })
 
 export type userForm = z.infer<typeof userSchema>;
