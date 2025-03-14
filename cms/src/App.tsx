@@ -6,9 +6,8 @@ interface User {
   name: string
   lastname: string
   email: string
+  tipo: string
 }
-
-
 
 
 export const App = () => {
@@ -16,7 +15,7 @@ export const App = () => {
   const [users, setUsers] = useState<User[]>([]);
 
   const handleAddUser = (newUser: User) => {
-    setUsers([ ...users, newUser ]);
+    setUsers([ newUser, ...users]);
   }
 
   return (

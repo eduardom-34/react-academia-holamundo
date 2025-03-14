@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+const typesTipos = ["Familiar", "Trabajo", "Amigo", "Otros"] as const;
+
 export const userSchema = z.object({
   name: z.string()
   .min(1, {message: 'Nombre es requerido'})
@@ -13,9 +15,7 @@ export const userSchema = z.object({
     .min(1, {message: 'Email es requerido'})
     .min(3, {message: "Longitud minima 3"}),
 
-  tipo: z.string({ required_error: "Tipo es requerido" })
-    .min(1, {message: 'Tipo es requerido'})
-    .min(3, {message: "Longitud minima 3"}),
+  tipo: z.enum(typesTipos, { message: "Por favor selecciona una opcion valida"})
 })
 
 export type userForm = z.infer<typeof userSchema>;

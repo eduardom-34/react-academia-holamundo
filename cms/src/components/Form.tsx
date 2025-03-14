@@ -59,13 +59,18 @@ export const Form = ({ onAddUser}: Props) => {
 
       <div className="mb-3">
         <label htmlFor="disabledSelect" className="form-label"> Tipo </label>
-        <select id="disabledSelect" className="form-select">
+        <select 
+          id="tipo" 
+          className="form-select"
+          {...register('tipo', {required: 'Seleeciona un tipo'})}
+          >
           <option>-- Selecciona tipo --</option>
-          <option>Familiar</option>
-          <option>Trabajo</option>
-          <option>Amigo</option>
-          <option>Otros</option>
+          <option value={"Familiar"}>Familiar</option>
+          <option value={"Trabajo"}>Trabajo</option>
+          <option value={"Amigo"}>Amigo</option>
+          <option value={"Otros"}>Otros</option>
         </select>
+        {errors.tipo?.message ?? <p>{ errors?.email?.message }</p> }
       </div>
 
       <button type="submit" className="btn btn-primary me-2">Enviar</button>
