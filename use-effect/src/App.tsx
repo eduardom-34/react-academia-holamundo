@@ -1,33 +1,13 @@
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
+import useUsers from "./hooks/useUsers"
 
 
-interface User {
-  id: string
-  name: string
-}
+
 
 
 export const App = () => {
 
-  const [user, setUser] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
-
-  useEffect(() => {
-    const url = "https://jsonplaceholder.typicode.com/users";
-
-    setLoading(true);
-
-    fetch(url)
-      .then((response) => {
-        if(!response.ok) throw new Error(`${response.status}`)
-        return response.json() as Promise<User[]>;
-      })
-      .then((data) => setUser(data))
-      .catch((error: Error) => setError(error.message))
-      .finally(() => setLoading(false));
-    
-  }, []);
+  const {loading, error, users } = useUsers();
 
 
   if(loading) {
@@ -40,7 +20,7 @@ export const App = () => {
 
   return (
     <ul>
-      {user.map(u => <li key={u.id}>{ u.name }</li>)}
+      {users.map(u => <li key={u.id}>{ u.name }</li>)}
     </ul>
   )
 }
