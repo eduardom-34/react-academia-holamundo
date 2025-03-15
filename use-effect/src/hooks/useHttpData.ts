@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
+type ID = {
+  id?: string | number
+}
 
 
-export default function useHttpData<T>(url: string) {
+export default function useHttpData<T extends ID>(url: string) {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
@@ -62,5 +65,26 @@ export default function useHttpData<T>(url: string) {
     }
 
   }
-  return { data, loading, error, addData }
+
+  const deleteData = async (id: string | number) => {
+    const initialData = [...data];
+    setData(data.filter(element => element.id !== id ));
+
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+      })
+
+      if(!response.ok) {
+        setData(initialData);
+        throw new Error(`${response.status}`)
+      }
+    } catch (error) {
+      setError((error as Error).message)
+      
+    }
+
+  }
+
+  return { data, loading, error, addData, deleteData }
 }
