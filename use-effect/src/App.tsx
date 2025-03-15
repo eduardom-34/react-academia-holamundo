@@ -1,8 +1,8 @@
-import useFetchData from "./hooks/useFetchData";
+import useHttpData from "./hooks/useHttpData";
 
 
 interface User {
-  id: string
+  id?: string
   name: string
 };
 
@@ -11,7 +11,7 @@ const url: string = "https://jsonplaceholder.typicode.com/users";
 
 export const App = () => {
 
-  const {loading, error, data: users } = useFetchData<User>(url);
+  const {loading, error, data: users, addData: addUser } = useHttpData<User>(url);
 
 
   if(loading) {
@@ -24,6 +24,7 @@ export const App = () => {
 
   return (
     <ul>
+      <button onClick={() => addUser({ name: 'Chanchito feliz'})}>Enviar</button>
       {users.map(u => <li key={u.id}>{ u.name }</li>)}
     </ul>
   )
