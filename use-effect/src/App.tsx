@@ -1,9 +1,17 @@
-// import { useEffect, useState } from "react"
-import useUsers from "./hooks/useUsers"
+import useFetchData from "./hooks/useFetchData";
+
+
+interface User {
+  id: string
+  name: string
+};
+
+
+const url: string = "https://jsonplaceholder.typicode.com/users";
 
 export const App = () => {
 
-  const {loading, error, users } = useUsers();
+  const {loading, error, data: users } = useFetchData<User>(url);
 
 
   if(loading) {
