@@ -1,10 +1,6 @@
 // import { useEffect, useState } from "react"
 import useUsers from "./hooks/useUsers"
 
-
-
-
-
 export const App = () => {
 
   const {loading, error, users } = useUsers();

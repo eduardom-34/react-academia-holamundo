@@ -12,19 +12,29 @@ export default function useUser() {
   const [error, setError] = useState<string>();
 
   useEffect(() => {
-    const url = "https://jsonplaceholder.typicode.com/users";
+    async function hook() {
+      const url = "https://jsonplaceholder.typicode.com/users";
 
-    setLoading(true);
+      setLoading(true);
 
-    fetch(url)
-      .then((response) => {
-        if(!response.ok) throw new Error(`${response.status}`)
-        return response.json() as Promise<User[]>;
-      })
-      .then((data) => setUsers(data))
-      .catch((error: Error) => setError(error.message))
-      .finally(() => setLoading(false));
-    
+
+      try {
+        const response = await fetch(url)
+        if (!response.ok) throw new Error(`${response.status}`)
+
+        const data: User[] = await response.json()
+        setUsers(data);
+
+      } catch (error) {
+        setError((error as Error).message)
+      } finally {
+        setLoading(false);
+      }
+
+    }
+
+    hook();
+
   }, []);
 
   return { users, loading, error }
