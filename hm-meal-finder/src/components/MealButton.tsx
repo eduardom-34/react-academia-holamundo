@@ -26,7 +26,7 @@ export const MealButton = ({ categories }: Props) => {
         >
           <Button
             variant={selected === index ? "outline" : "ghost"}
-            className={selected === index ? "bg-blue-400 text-white" : ""}
+            className={selected === index ? "bg-blue-400 text-white font-bold" : ""}
             onClick={() => setSelected(index)}
           >{c.strCategory}</Button>
         </div>
