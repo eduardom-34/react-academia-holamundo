@@ -1,5 +1,6 @@
 import useHttpData from "@/hooks/useHttpData";
-import { Button } from "@/components/ui/button"
+// import { Button } from "@/components/ui/button"
+import { MealButton } from "./MealButton";
 // import { useState } from "react";
 
 
@@ -34,12 +35,7 @@ export const Sidebar = (  ) => {
   return (
     <div>
       <h2 className="mb-5">Categorias</h2>
-        {data?.meals.map( (c, index) => (
-          <div key={index} className="mb-4">
-          <Button>{c.strCategory}</Button>
-        </div>
-          
-        ))}
+      <MealButton categories={data || { meals: [] }}></MealButton>
     </div>
   )
 }
