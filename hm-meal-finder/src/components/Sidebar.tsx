@@ -13,12 +13,17 @@ export interface Meal {
 
 export interface Categories {
   meals: Meal[];
+  
 }
 
-export const Sidebar = (  ) => {
+interface Props {
+  sendCategory: (category: string) => void;
+}
+
+export const Sidebar = ( { sendCategory }: Props ) => {
 
   const { loading, error, data } = useHttpData<Categories>(url);
-  
+
 
   // console.log({data});
 
@@ -35,7 +40,7 @@ export const Sidebar = (  ) => {
   return (
     <div>
       <h2 className="mb-5">Categorias</h2>
-      <MealButton categories={data || { meals: [] }}></MealButton>
+      <MealButton categories={data || { meals: [] }} sendCategory={sendCategory}></MealButton>
     </div>
   )
 }

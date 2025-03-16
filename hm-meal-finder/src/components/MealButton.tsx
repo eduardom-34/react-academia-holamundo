@@ -11,10 +11,11 @@ export interface Categories {
 }
 
 interface Props {
-  categories: Categories
+  categories: Categories;
+  sendCategory: ( category: string) => void
 }
 
-export const MealButton = ({ categories }: Props) => {
+export const MealButton = ({ categories, sendCategory }: Props) => {
 
   const [selected, setSelected] = useState(0);
 
@@ -27,7 +28,11 @@ export const MealButton = ({ categories }: Props) => {
           <Button
             variant={selected === index ? "outline" : "ghost"}
             className={selected === index ? "bg-blue-400 text-white font-bold" : ""}
-            onClick={() => setSelected(index)}
+            onClick={() => {
+              setSelected(index);
+              sendCategory(c.strCategory);
+            }}
+            
           >{c.strCategory}</Button>
         </div>
 
