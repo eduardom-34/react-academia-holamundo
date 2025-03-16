@@ -36,9 +36,9 @@ export default function useHttpData<T>(url: string, ) {
 
     hook();
 
-    return () => controller.abort();
+    // return () => controller.abort();
 
-  }, []);
+  }, [url]);
 
   return { data, loading, error }
 }
