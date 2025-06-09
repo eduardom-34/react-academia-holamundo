@@ -9,9 +9,17 @@ function App() {
     'Eren'
   ]
 
+  const handleSelect = (elemento: string) => {
+    console.log('imprimiendo', elemento);
+  }
+  const handleSelect2 = (elemento: string) => {
+    console.log('mostrando', elemento);
+  }
+
   return <Card>
     <CardBody title='Hola mundo' text='Este es el texto'></CardBody>
-    <List data={ list }/>
+    <List data={ list } onSelect={ handleSelect } />
+    <List data={ list } onSelect={ handleSelect2 } />
   </Card>
 }
 
