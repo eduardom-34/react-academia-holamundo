@@ -26,10 +26,13 @@ interface CardBodyProps {
 
 export function CardBody( props: CardBodyProps ) {
 
+  const list: string[] = [];
+
   const { title, text } = props;
 
   return (
     <>
+      {list.length !== 0 && "Mi lista"}
       <h5 className="card-title">{ title }</h5>
       <p className="card-text">{ text }</p>
     </>
